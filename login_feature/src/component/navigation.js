@@ -10,11 +10,7 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Logo from "../assets/company_logo.png";
 import $ from "jquery";
 
-$(document).on("click", ".nav-item", function (e) {
-  $(this).addClass("active").siblings().removeClass("active");
-});
-
-class navigation extends Component {
+export default class navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,21 +41,14 @@ class navigation extends Component {
     const UserLoggedIn = this.state.LoggedIn ? "inherit" : "none";
     return (
       <nav
-        className="navbar navbar-expand-lg navbar-dark bg-primary_change"
+        className="navbar navbar-expand-lg navbar-dark bgColor"
         style={{
           marginBottom: "10px",
-          backgroundColor: "#563d7c!important",
           borderRadius: "0px 0px 10px 10px",
         }}
       >
-        <a className="navbar-brand" href="/">
-          <img
-            src={Logo}
-            width="50"
-            height="50"
-            alt="Company_logo"
-            style={{ borderRadius: "50%", margin: "5px" }}
-          />
+        <a className="navbar-brand" href="/home">
+          <img src={Logo} alt="Company_logo" className="logo" />
         </a>
         <button
           className="navbar-toggler"
@@ -69,6 +58,7 @@ class navigation extends Component {
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          style={{ backgroundColor: "#76c7d5" }}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -81,31 +71,46 @@ class navigation extends Component {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/" className="nav-link">
+              <Link to="/about-us" className="nav-link">
                 About us
               </Link>
             </li>
           </ul>
-          <ul
-            className="nav navbar-nav navbar-right"
-            style={{ position: "absolute", right: "10px" }}
-          >
-            <li>
-              <form className="form-inline my-2 my-lg-0">
-                <button
-                  className="btn btn-outline-light my-2 my-sm-0"
-                  type="submit"
-                  onClick={() => this.logout()}
-                  style={{ display: UserLoggedIn }}
-                >
-                  {this.state.fname} Log out?
-                </button>
-              </form>
-            </li>
-          </ul>
+          <li className="dropdown nav navbar-nav">
+            <a
+              href="#"
+              className="dropdown-toggle"
+              data-toggle="dropdown"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              style={{ textDecoration: "none", display: UserLoggedIn }}
+            >
+              Hi {this.state.fname}
+            </a>
+            <ul
+              className="dropdown-menu"
+              style={{ backgroundColor: "#76c7d5" }}
+            >
+              <li className="nav-item">
+                <form>
+                  <button
+                    type="submit"
+                    onClick={() => this.logout()}
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                    }}
+                    className="btn btn-link btn-logout"
+                  >
+                    Logout
+                  </button>
+                </form>
+              </li>
+            </ul>
+          </li>
         </div>
       </nav>
     );
   }
 }
-export default navigation;
