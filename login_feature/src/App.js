@@ -10,9 +10,10 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./component/login.js";
 import Register from "./component/register.js";
-import Home from "./component/home";
+import Home from "./component/home.js";
 import Footer from "./component/footer.js";
 import Navigation from "./component/navigation.js";
+import AboutUs from "./component/aboutUs.js";
 
 const Main = withRouter(({ location }) => {
   return (
@@ -23,6 +24,7 @@ const Main = withRouter(({ location }) => {
       {localStorage.getItem("isLoggedIn") == 1 ? (
         <div>
           <Route path="/home" component={Home}></Route>
+          <Route path="/about-us" component={AboutUs}></Route>
         </div>
       ) : null}
       <Route path="/login" component={Login}></Route>
