@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import avatar from "../assets/avatar.png";
 
 const formValid = ({ isError, ...rest }) => {
   var isValid = false;
@@ -29,7 +30,7 @@ const formValid = ({ isError, ...rest }) => {
   return isValid;
 };
 const regExp = RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
-class register extends Component {
+export default class register extends Component {
   constructor(props) {
     super(props);
 
@@ -58,8 +59,11 @@ class register extends Component {
       axios
         .post("http://3.9.90.115/public/api/v1/user/register", obj)
         .then((res) => {
-          if (res.auth_token) {
+          console.log("Response", res);
+          if (res.status == 201) {
             this.props.history.push("/home");
+          } else {
+            console.log("Somethis is wrong");
           }
         });
     } else {
@@ -108,12 +112,12 @@ class register extends Component {
           <form
             onSubmit={this.onSubmit}
             noValidate
-            className="rounded-top formClass"
-            style={{ backgroundColor: "#d1ecf1", padding: "35px" }}
+            className="rounded-top bgColor formCss"
           >
-            <div style={{ textAlign: "center" }}>
-              <h3>Register</h3>
+            <div className="avatar">
+              <img src={avatar} alt="Avatar" />
             </div>
+            <h2 className="text-center formHeader">Member Registration</h2>
             <div className="form-group">
               <label>First Name</label>
               <input
@@ -180,7 +184,9 @@ class register extends Component {
               )}
             </div>
 
-            <button type="submit">Register user</button>
+            <button type="submit" className="buttonCls">
+              Register user
+            </button>
             <label>Already have account? then</label>
             <Link to="/login"> login in</Link>
           </form>
@@ -190,5 +196,3 @@ class register extends Component {
     );
   }
 }
-
-export default register;

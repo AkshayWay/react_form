@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import avatar from "../assets/avatar.png";
 
 export default class login extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ export default class login extends Component {
     };
   }
 
-  onSubmit1 = (e) => {
+  onSubmit = (e) => {
     e.preventDefault();
     if (this.state.email != "") {
       if (this.state.password != "") {
@@ -63,15 +64,11 @@ export default class login extends Component {
       <div className="row" style={{ marginTop: "100px" }}>
         <div className="col-sm"></div>
         <div className="col-sm">
-          <form
-            onSubmit={this.onSubmit1}
-            noValidate
-            className="rounded-top"
-            style={{ backgroundColor: "#d1ecf1", padding: "35px" }}
-          >
-            <div style={{ textAlign: "center" }}>
-              <h3>Login</h3>
+          <form onSubmit={this.onSubmit} noValidate className="bgColor formCss">
+            <div className="avatar">
+              <img src={avatar} alt="Avatar" />
             </div>
+            <h2 class="text-center formHeader">Member Login</h2>
             <div className="form-group">
               <label>Email</label>
               <input
@@ -95,9 +92,11 @@ export default class login extends Component {
               />
             </div>
 
-            <button type="submit">Login</button>
-            <label>Create account? then</label>
-            <Link to="/register"> register here</Link>
+            <button type="submit" className="buttonCls">
+              Login
+            </button>
+            <label>Don't have an account?</label>
+            <Link to="/register"> Register here!</Link>
           </form>
         </div>
         <div className="col-sm"></div>
