@@ -2,7 +2,7 @@ import React, { component, Component } from "react";
 import AppCSS from "../App.css";
 import axios from "axios";
 
-class home extends Component {
+export default class home extends Component {
   constructor(props) {
     super(props);
 
@@ -69,5 +69,3 @@ class home extends Component {
     );
   }
 }
-
-export default home;
